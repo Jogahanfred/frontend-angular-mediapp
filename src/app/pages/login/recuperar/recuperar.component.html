@@ -1,0 +1,17 @@
+<div class="example-container"  *ngIf="route.children.length === 0">
+  <!--email-->
+    <mat-form-field>
+        <input matInput type="email" placeholder="Tu email" required [(ngModel)]="email">
+    </mat-form-field>
+<!--progres bar para que se muestre el avance -->
+    <mat-progress-bar mode="determinate" [value]="porcentaje"></mat-progress-bar>
+
+    <br />
+    <!--BOTON QUE SE ACTIVA SIEMPRE Y CUANDO SEAN IGUALES LAS CONTRASEÑAS-->
+    <button mat-raised-button color="primary" (click)="enviar()" [disabled]="!email">Enviar correo</button>
+
+    <mat-toolbar *ngIf="mensaje">{{mensaje}}</mat-toolbar>
+    <mat-toolbar *ngIf="error">{{error}}</mat-toolbar>
+</div>
+<!--PERMITE SABER SI HAY UNA RUTA HIJA :: SI NO SE MUESTRA ESA VALIDACION, SIEMPRE MOSTRARA LOS DOS COMPONENTES-->
+<router-outlet *ngIf="route.children.length !== 0"></router-outlet>

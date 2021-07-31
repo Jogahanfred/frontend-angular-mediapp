@@ -1,0 +1,43 @@
+<!-- No olvidar agregar ReactiveFormsModule en App.module.ts, util para trabajar con formularios-->
+<form class="example-container" [formGroup]="form" #frmPaciente="ngForm" (ngSubmit)="operar()">
+
+  <div [hidden]="true">
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="ID" required formControlName="id">
+      </mat-form-field>
+  </div>
+
+  <mat-form-field class="example-full-width">
+      <input matInput placeholder="Nombres" minlength="3"  maxlength="70" required formControlName="nombres">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput placeholder="Apellidos" minlength="3"  maxlength="70" required formControlName="apellidos">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput placeholder="DNI" minlength="8"  maxlength="8"  required formControlName="dni" type="number">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput placeholder="Teléfono" minlength="9"  maxlength="9"  required formControlName="telefono" type="number">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput placeholder="Direccion" minlength="3"  maxlength="150"  required formControlName="direccion">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email"  maxlength="55" required type="email" formControlName="email">
+  </mat-form-field>
+<!--[disabled]="frmPaciente.invalid" .- SE VALIDA QUE LOS CAMPOS REQUERIDOS ESTEN LLENOS PARA HABILITARSE-->
+  <button mat-raised-button color="primary" type="submit" [disabled]="frmPaciente.invalid">
+      <mat-icon>done</mat-icon>
+      <span>Aceptar</span>
+  </button>
+  <button mat-raised-button color="accent" routerLink='/pages/paciente' type="button">
+      <mat-icon>close</mat-icon>
+      <span>Cancelar</span>
+  </button>
+
+</form>

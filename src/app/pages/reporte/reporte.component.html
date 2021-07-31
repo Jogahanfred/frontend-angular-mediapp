@@ -1,0 +1,32 @@
+<mat-toolbar>Reporte de consultas</mat-toolbar>
+
+<button mat-button color="primary" (click)="cambiar('line')">Lineal</button>
+<button mat-button color="primary" (click)="cambiar('bar')">Barras</button>
+<button mat-button color="primary" (click)="cambiar('doughnut')">Rosquilla</button>
+<button mat-button color="primary" (click)="cambiar('radar')">Radar</button>
+<button mat-button color="primary" (click)="cambiar('pie')">Pie</button>
+
+<!-- [hidden]="!chart".- cuando sea nulo , no se muestra-->
+<div [hidden]="!chart">
+    <canvas id="canvas">{{chart}}</canvas>
+</div>
+
+<button mat-button color="primary" (click)="generarReporte()">Ver PDF</button>
+<button mat-button color="primary" (click)="descargarReporte()">Descargar PDF</button>
+
+<!--*ngIf="pdfSrc" .- mostrar si no es nulo
+     [src]="pdfSrc" .- mostrar el archivo-->
+<pdf-viewer *ngIf="pdfSrc" [src]="pdfSrc" [render-text]="true" style="display: block;"></pdf-viewer>
+
+<!--Para subir archivos-->
+<!--onclick="document.getElementById('flArchivo').click()" .- SIRVE PARA DARLE FORMATO DE ANGULAR MATERIAL AL BOTON-->
+<!--onclick="document.getElementById('flArchivo').click()".- ES UN EVENTO QUE ACTIVA EL INPUT flArchivo-->
+<button mat-button color="primary" onclick="document.getElementById('flArchivo').click()">Seleccionar</button>
+<input id="flArchivo" type="file" style="display: none;" (change)="seleccionarArchivo($event)" >
+<!--DE TS DEVUELVE EL NOMBRE DE ARCHIVO -->
+<p>{{nombreArchivo}}</p>
+<!--BOTON QUE SE ACTIVA SI SE LLEGO A SUBIR EL ARCHIVO-->
+<button mat-button color="primary" (click)="subirArchivo()" [disabled]="!archivosSeleccionados">Subir Archivo</button>
+
+<!--MUESTRA IMAGEN SUBIDA-->
+<img mat-card-image [src]="imagenData" *ngIf="imagenEstado" >

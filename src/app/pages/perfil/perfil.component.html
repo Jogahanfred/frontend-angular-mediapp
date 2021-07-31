@@ -1,0 +1,26 @@
+<mat-toolbar>Perfil</mat-toolbar>
+
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Usuario:
+      </mat-panel-title>
+      <mat-panel-description>
+        {{usuario}}
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-divider></mat-divider>
+
+    <mat-list>
+      <div mat-subheader>Privilegios</div>
+      <mat-list-item *ngFor="let roles of rol">
+        <mat-icon mat-list-icon>manage_accounts</mat-icon>
+        <div mat-line>{{roles}}</div>
+      </mat-list-item>
+
+    </mat-list>
+
+  </mat-expansion-panel>
+</mat-accordion>

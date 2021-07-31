@@ -1,0 +1,44 @@
+<router-outlet></router-outlet>
+<div class="example-header">
+  <mat-form-field>
+    <!--Valida cuando tiene hijos, osea cuando viene data despues de la URL lo oculta sino, lo muestra-->
+      <input matInput (keyup)="filtrar($event.target.value)" placeholder="Buscar paciente">
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"><!--MATSORT PARA ORDENAR-->
+  <ng-container matColumnDef="idPaciente">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.idPaciente}} </td>
+  </ng-container>
+  <ng-container matColumnDef="nombres">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
+  </ng-container>
+  <ng-container matColumnDef="apellidos">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+    <td mat-cell *matCellDef="let element"> {{element.apellidos}} </td>
+  </ng-container>
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let element">
+      <!--rutea a edicion con ID-->
+      <button mat-button color="primary" matTooltip="Actualizar Registro" [routerLink]="['edicion', element.idPaciente]">
+        <mat-icon>ballot</mat-icon>
+      </button>
+      <button mat-button color="warn" matTooltip="Eliminar Registro" (click)="eliminar(element.idPaciente)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+<mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" [length]="cantidad" (page)="mostrarMas($event)"></mat-paginator>
+
+<button mat-fab color="accent" style="float: right" routerLink='/pages/paciente/nuevo'>
+  <mat-icon>add</mat-icon>
+</button>
